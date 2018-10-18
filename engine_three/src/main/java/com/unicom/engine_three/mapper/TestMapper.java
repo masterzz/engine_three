@@ -9,4 +9,6 @@ import com.unicom.engine_three.model.Test;
 @Mapper
 public interface TestMapper {
 	public Test selectById(int id);
+
+	public List<Test> list();
 }

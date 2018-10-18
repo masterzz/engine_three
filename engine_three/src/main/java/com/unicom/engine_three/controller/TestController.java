@@ -1,10 +1,13 @@
 package com.unicom.engine_three.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.unicom.engine_three.model.Test;
 import com.unicom.engine_three.service.TestService;
 
 @Controller
@@ -27,8 +30,15 @@ public class TestController {
 	
 	@RequestMapping(value="/test1")
 	public String test1(){
-		
 		System.out.println("test1");
 		return "test";
+	}
+	
+	@RequestMapping(value="/pageHelper")
+	@ResponseBody
+	public List<Test> pageHelper(){
+		System.out.println("pageHelper");
+		List<Test> list = testService.list();
+		return list;
 	}
 }
