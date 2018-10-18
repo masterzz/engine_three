@@ -1,5 +1,6 @@
 package com.unicom.engine_three.model;
 
+//这个用户指的是登录用户
 public class User {
 	private int id;
 	private String username;

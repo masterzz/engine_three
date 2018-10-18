@@ -1,5 +1,8 @@
 package com.unicom.engine_three.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +29,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User login(HttpServletRequest request) {
+	public Map<String, Object> login(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String,Object>();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
@@ -35,11 +39,23 @@ public class UserServiceImpl implements UserService{
 		user0.setPassword(password);
 //		获取用户
 		User user = getUserByNameAndPassword(user0);
+		String status = "no";
+		String type = "null";
+		String currentAuthority = "null";
+		System.out.println("user service");
+//		用户存在时放入session中
 		if(user != null) {
 			session.setAttribute("username", user.getUsername());
 			session.setAttribute("role", "normal");
+			status = "ok";
+			type = "account";
+			currentAuthority = "admin";
 		}
-		return user;
+//		构造返回map
+		map.put("status", status);
+		map.put("type", type);
+		map.put("currentAuthority", currentAuthority);
+		return map;
 	}
 	
 	

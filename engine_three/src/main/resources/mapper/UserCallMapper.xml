@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace : 命名空间 -->
+<mapper namespace="com.unicom.engine_three.mapper.UserCallMapper">
+	<!-- 统计用户平均通话量 -->
+	<resultMap type="UserCall" id="userCallMap">
+		<id column="start_date" property="startDate" />
+		<result column="time" property="callDuration" />
+	</resultMap>
+
+	<!-- 统计用户每天分时段使用量 -->
+	<resultMap type="UserCall" id="useCondition">
+		<!-- 打电话的时间，哪个小时 -->
+		<id column="call_time" property="startTime" />
+		<!-- 在哪一天打的电话 -->
+		<result column="day" property="startDate" />
+		<!-- 这一时段总的用户数 -->
+		<result column="total_user" property="userSum" />
+		<!-- 总的通话时长，单位为分钟 -->
+		<result column="total_call" property="callDuration" />
+	</resultMap>
+
+	<select id="getAverageCallTime" resultType="double">
+		SELECT
+		SUM(a.`call_duration`)/COUNT(DISTINCT(a.`user_id`)) FROM
+		`peixun_group3_user_call` a
+	</select>
+
+	<select id="dayCallTime" resultMap="userCallMap">
+		SELECT a.`start_date`,
+		SUM(a.`call_duration`)/COUNT(DISTINCT(a.`user_id`)) time FROM
+		peixun_group3_user_call a GROUP BY a.`start_date`;
+	</select>
+
+	<select id="dayUseCondition" parameterType="java.lang.String"
+		resultMap="useCondition">
+		SELECT #{day} as day,SUBSTR(start_time,1,2) AS
+		call_time,
+		COUNT(DISTINCT user_id) AS total_user,
+		ROUND(SUM(call_duration)/60) AS total_call
+		FROM peixun_group3_user_call a WHERE a.`start_date`=#{day}
+		GROUP BY SUBSTR(start_time,1,2);
+	</select>
+</mapper>

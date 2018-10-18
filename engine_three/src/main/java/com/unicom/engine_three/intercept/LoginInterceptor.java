@@ -8,9 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        System.out.println("LoginInterceptor preHandle");
-//        httpServletResponse.sendRedirect("/login/index");
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o) throws Exception {
+//       System.out.println("LoginInterceptor preHandle");
+//       System.out.println("username: " + request.getSession().getAttribute("userrname"));
+//      httpServletResponse.sendRedirect("/login/index");
         return true;
     }
 
