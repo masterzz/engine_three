@@ -16,4 +16,6 @@ public interface UserCallMapper {
 	List<UserCall> dayCallTime();
 
 	List<UserCall> dayUseCondition(String day);
+
+	List<UserCall> daysUseCondition();
 }

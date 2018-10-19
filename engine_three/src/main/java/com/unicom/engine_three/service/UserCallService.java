@@ -11,4 +11,6 @@ public interface UserCallService {
 	List<UserCall> dayCallTime();
 
 	List<UserCall> dayUseCondition(String day);
+
+	List<UserCall> daysUseCondition();
 }

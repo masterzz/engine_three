@@ -30,4 +30,9 @@ public class UserCallServiceImpl implements UserCallService{
 	public List<UserCall> dayUseCondition(String day) {
 		return userCallMapper.dayUseCondition(day);
 	}
+
+	@Override
+	public List<UserCall> daysUseCondition() {
+		return userCallMapper.daysUseCondition();
+	}
 }

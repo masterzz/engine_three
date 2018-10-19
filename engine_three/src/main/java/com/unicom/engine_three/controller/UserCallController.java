@@ -37,4 +37,11 @@ public class UserCallController {
 	public List<UserCall> dayUseCondition(String day){
 		return userCallService.dayUseCondition(day);
 	}
+	
+//	使用用户数分时段展示柱状图，多日数据
+	@RequestMapping(value="/daysUseCondition")
+	@ResponseBody
+	public List<UserCall> daysUseCondition(){
+		return userCallService.daysUseCondition();
+	}
 }
