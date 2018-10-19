@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,6 +12,7 @@ import com.unicom.engine_three.model.UserCall;
 import com.unicom.engine_three.service.UserCallService;
 
 @Controller
+@CrossOrigin
 public class UserCallController {
 	@Autowired
 	UserCallService userCallService;

@@ -57,6 +57,21 @@ public class UserServiceImpl implements UserService{
 		map.put("currentAuthority", currentAuthority);
 		return map;
 	}
-	
-	
+
+	@Override
+	public Object modify(HttpServletRequest request) {
+		String username =request.getParameter("username");
+		String password =request.getParameter("password");
+		String newPassword = request.getParameter("newPassword");
+		User original = new User();
+		original.setUsername(username);
+		original.setPassword(password);
+//		待修改的user
+		User user = userMapper.getUserByNameAndPassword(original);
+		if(user == null)
+			return null;
+		user.setPassword(newPassword);
+		userMapper.updateUser(user);
+		return user;
+	}
 }

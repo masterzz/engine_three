@@ -1,12 +1,11 @@
 package com.unicom.engine_three.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.unicom.engine_three.model.Test;
 import com.unicom.engine_three.service.TestService;
 
@@ -14,11 +13,13 @@ import com.unicom.engine_three.service.TestService;
 public class TestController {
 	@Autowired
 	private TestService testService;
+	@Value("server.port")
+	String port;
 	
 	@RequestMapping(value="/hello")
 	@ResponseBody
 	public String hello(){
-		return "hello1";
+		return "hello1:" + port;
 	}
 	
 	@RequestMapping(value="/test")

@@ -15,4 +15,6 @@ public interface UserService {
 	Map<String, Object> login(HttpServletRequest request);
 	
 	User getUserByNameAndPassword(User user);
+
+	Object modify(HttpServletRequest request);
 }

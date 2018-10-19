@@ -31,4 +31,12 @@ public class UserController {
 //		根据用户名找到user，并将用户的用户名信息、角色信息添加到session中
 		return request.getSession().getAttribute("username");
 	}
+	
+//	修改密码
+	@RequestMapping(value="/modify")
+	@ResponseBody
+	public Object modify(HttpServletRequest request){
+//		根据用户名找到user，并将用户的用户名信息、角色信息添加到session中
+		return userService.modify(request);
+	}
 }

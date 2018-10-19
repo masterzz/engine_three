@@ -11,4 +11,9 @@
 	<select id="getUserByNameAndPassword" parameterType="User" resultType="User">
 		SELECT user_id id ,user_name username  FROM sys_user where user_name = #{username} and password=#{password}
 	</select>
+	
+	<update id="updateUser" parameterType="User">
+		UPDATE sys_user SET  PASSWORD = #{password} WHERE user_id = #{id};
+	</update>
+	
 </mapper>

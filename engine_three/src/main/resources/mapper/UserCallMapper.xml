@@ -34,13 +34,16 @@
 		peixun_group3_user_call a GROUP BY a.`start_date`;
 	</select>
 
+	<!-- 日用户分时段 -->
+	<!-- call_time是时段，分成6个时段 -->
 	<select id="dayUseCondition" parameterType="java.lang.String"
 		resultMap="useCondition">
-		SELECT #{day} as day,SUBSTR(start_time,1,2) AS
+		SELECT #{day} as day,FLOOR(SUBSTR(start_time,1,2)/4) AS
 		call_time,
 		COUNT(DISTINCT user_id) AS total_user,
 		ROUND(SUM(call_duration)/60) AS total_call
 		FROM peixun_group3_user_call a WHERE a.`start_date`=#{day}
-		GROUP BY SUBSTR(start_time,1,2);
+		GROUP BY FLOOR(SUBSTR(start_time,1,2)/4);
 	</select>
+	
 </mapper>
