@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService{
 		String status = "no";
 		String type = "null";
 		String currentAuthority = "null";
+		System.out.println("username: " + username + ", password:" + password);
+		System.out.println("data:" + request.getParameter("data"));
 		System.out.println("user service");
 //		用户存在时放入session中
 		if(user != null) {
