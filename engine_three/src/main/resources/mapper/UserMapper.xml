@@ -16,4 +16,28 @@
 		UPDATE sys_user SET  PASSWORD = #{password} WHERE user_id = #{id};
 	</update>
 	
+	<!-- added by xwt -->
+	<select id="getUserAll"  resultType="User">
+		SELECT *,user_id id,create_time createTime,user_name username  FROM sys_user; 
+	</select>
+	<update id="updateUserInfo" parameterType="User">		
+		UPDATE sys_user SET  user_name=#{username}, PASSWORD = #{password},name=#{name},address=#{address},phone=#{phone},email=#{email},sex=#{sex},age=#{age},create_time=#{createTime} WHERE user_id = #{id};	
+	</update>
+	
+	<delete id="deleteMoreUser" parameterType="int[]">
+		delete *  FROM sys_user where user_id in
+		<foreach collection="array" item="arr" index="no" open="("
+			separator="," close=")">
+			#{arr}
+		</foreach> 
+	</delete>
+	
+	<insert id="insert" parameterType="User">
+		insert into sys_user(user_name,password,name,age,address,phone,email,sex,create_time) values(#{username},#{password},#{name},#{age},#{address},#{phone},#{email},#{sex},#{createTime})
+	</insert>
+	
+	<!-- added end -->
+	
+	
+	
 </mapper>

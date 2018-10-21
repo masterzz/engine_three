@@ -1,6 +1,10 @@
 package com.unicom.engine_three.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +20,7 @@ import com.unicom.engine_three.service.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
-	UserMapper userMapper;
+	private UserMapper userMapper;
 	
 	@Override
 	public User getUserByName(String username) {
@@ -75,5 +79,58 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(newPassword);
 		userMapper.updateUser(user);
 		return user;
+	}
+
+	@Override
+	public List<User> getUserAll() {
+		// TODO Auto-generated method stub
+		return userMapper.getUserAll();
+	}
+
+	@Override
+	public Object updateUserInfo(HttpServletRequest request) {
+		
+		User user  = new User();
+		
+		userMapper.updateUser(user);
+		return user;
+	}
+	
+	@Override
+	public Object deleteMoreUser(HttpServletRequest request) {
+		
+		String[] userids =  request.getParameter("userids").split(",");
+		int[] user_id=new int[userids.length];
+		for (int i = 0; i < userids.length; i++) {
+			user_id[i]=Integer.parseInt(userids[i]);
+		}
+		userMapper.deleteMoreUser(user_id);
+		return user_id;
+	}
+	
+	@Override
+	public void insert(HttpServletRequest request) {
+		
+		User user =  new User();
+		
+		System.out.println("hello"+request.getParameter("username"));
+		user.setUsername(request.getParameter("username"));
+		user.setSex(request.getParameter("sex"));
+		user.setPhone(request.getParameter("phone"));
+		user.setPassword(request.getParameter("password"));
+		user.setName(request.getParameter("name"));
+		user.setEmail(request.getParameter("email"));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			user.setCreateTime(sdf.parse(request.getParameter("createtime")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		user.setAge(request.getParameter("age"));
+		user.setAddress(request.getParameter("address"));
+
+		userMapper.insert(user);
 	}
 }

@@ -17,4 +17,15 @@ public interface UserService {
 	User getUserByNameAndPassword(User user);
 
 	Object modify(HttpServletRequest request);
+	
+	
+	// adder by xwt
+	List<User> getUserAll();
+		
+	Object updateUserInfo(HttpServletRequest request);
+		
+	Object deleteMoreUser(HttpServletRequest request);
+
+	void insert(HttpServletRequest request);
+		
 }
