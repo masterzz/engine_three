@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- namespace : 命名空间 -->
+<mapper namespace="com.unicom.engine_three.mapper.VoiceAnalyzeMapper">
+	<select id="queryAll" resultType="UserInvoice">
+		SELECT a.user_id,a.start_date,a.start_time,a.call_duration,a.jizhan,
+				(SELECT b.location FROM peixun_group3_jizhan b WHERE b.jizhan=a.jizhan) AS location
+		  FROM peixun_group3_user_call a WHERE start_time='094714'
+	</select>
+	
+	<select id="queryUserHeatMap" resultType="java.util.HashMap">
+		SELECT b.location,COUNT(a.user_id) user_sum
+		  FROM peixun_group3_user_call a,peixun_group3_jizhan b
+		 WHERE a.jizhan=b.jizhan
+		 GROUP BY b.station,b.location
+	</select>
+
+	<select id="queryLocation" resultType="java.util.HashMap">
+		<!-- SELECT b.location
+		  FROM peixun_group3_user_call a,peixun_group3_jizhan b
+		 WHERE a.jizhan=b.jizhan LIMIT 2000 -->
+		 SELECT b.location FROM  peixun_group3_user_call_bak b LIMIT 40000
+	</select>
+</mapper>
